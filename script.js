@@ -12,7 +12,10 @@ function setupAudioControls() {
     // Inicializa volume e estado mute
     audio.volume = 0.5;   // valor inicial
     audio.muted = true;   // começa mutado para autoplay
-    if (volumeSlider) volumeSlider.value = audio.volume; // slider 0-1
+    if (volumeSlider){ 
+      
+      audio.volume = volumeSlider.value; // slider 0-1
+    }
     if (muteToggle) muteToggle.checked = audio.muted;
 
     // Tenta tocar o áudio
