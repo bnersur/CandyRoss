@@ -458,7 +458,7 @@
         
          <h3><strong>BEM-VINDOS AO CANDY ROSS! Neste desafio, cada bloco equivale a um pirulito. O seu objetivo é quebrá-los.<strong></h3>
         <p>Este é um jogo de encaixar blocos. Seu objetivo principal é completar linhas horizontais (10 pontos) e, principalmente, completar um quadrado sólido de 5x5 blocos(super pontos) em qualquer lugar da arena!</p>
-
+        <p> Autor do Som: PoorKidMusic </p>
         <h3><br><strong>Controles:</strong></br></h3>
         <p><br><strong>Use as teclas de seta ou os botões na tela:</strong></br></p>
         <ul>
@@ -923,6 +923,48 @@
             document.getElementById("rotate").onclick=()=>playerRotate(1);
         }
         setupAudioControls();
+        // 🎁 Easter Egg: "rosslove" desbloqueia surpresa
+      (function(){
+          const secret = "rosslove";
+          let input = "";
+      
+          document.addEventListener("keydown", (e) => {
+              input += e.key.toLowerCase();
+              if (!secret.startsWith(input)) input = e.key.toLowerCase();
+              if (input === secret) {
+                  input = "";
+                  const hearts = document.createElement("div");
+                  hearts.innerText = "💖 Você descobriu o segredo da Candy Ross! 💖";
+                  hearts.style.position = "fixed";
+                  hearts.style.top = "50%";
+                  hearts.style.left = "50%";
+                  hearts.style.transform = "translate(-50%, -50%)";
+                  hearts.style.background = "#ffb3d9";
+                  hearts.style.color = "#cc0066";
+                  hearts.style.padding = "20px 40px";
+                  hearts.style.borderRadius = "15px";
+                  hearts.style.fontWeight = "bold";
+                  hearts.style.fontSize = "20px";
+                  hearts.style.boxShadow = "0 0 20px #ff66b2";
+                  hearts.style.zIndex = 9999;
+                  document.body.appendChild(hearts);
+      
+                  // Animação simples de flutuação
+                  let opacity = 1;
+                  const fade = setInterval(() => {
+                      hearts.style.transform = `translate(-50%, -${50 + (1 - opacity) * 100}px)`;
+                      hearts.style.opacity = opacity;
+                      opacity -= 0.02;
+                      if (opacity <= 0) {
+                          clearInterval(fade);
+                          hearts.remove();
+                      }
+                  }, 50);
+              }
+          });
+      })();
+
+
     </script>
 </body>
 </html>
